@@ -1,54 +1,98 @@
 window.onload = function() {
+    var Numerador1 = 0,
+        Numerador2 = 0,
+        Denominador1 = 0,
+        Denominador2 = 0;
+    var opcion = div => document.getElementById(div);
 
-    var opcion = div => document.getElementById;
+    function validar() {
+        val = false;
 
+        if (opcion("denomFrac1").value != 0 && opcion("denomFrac2").value != 0) {
+            Numerador1 = parseInt(opcion("numFrac1").value);
+            Denominador1 = parseInt(opcion("denomFrac1").value);
+            Numerador2 = parseInt(opcion("numFrac2").value);
+            Denominador2 = parseInt(opcion("denomFrac2").value);
+            val = true;
+        } else if (opcion("denomFrac1").value === 0 || opcion("denomFrac2").value === 0) {
+            alert("El denominador del fraccionario no puede ser 0");
+            val = false;
+        }
+        return val;
+    }
 
+    const Suma = () => {
+        var numRes = 0;
+        var denomRes = 0;
 
-    /*const Suma = (Frac1, Frac2) => {
+        if (Denominador1 === Denominador2) {
+            numRes = Numerador1 + Numerador2;
+            denomRes = Denominador1;
+        } else {
 
+        }
+
+        var fracRes = numRes + "/" + denomRes;
+        console.log(fracRes);
+        return fracRes;
     };
-    const Resta = (Frac1, Frac2) => {
+    /*const Resta = (Frac1, Frac2) => {
 
     };*/
-    const Mult = (a, b, c, d) => {
-        var numRes = a * b;
-        var denomRes = c * d;
+    const Mult = () => {
+        var numRes = Numerador1 * Numerador2;
+        var denomRes = Denominador1 * Denominador2;
+        var fracRes = numRes + "/" + denomRes;
 
-        var simplify = gcd(numRes, denomRes);
-        numRes = numRes / simplify;
-        denomRes = denomRes / simplify;
-        //return numRes + "/" + denomRes;
-        console.log(numRes + "/" + denomRes);
+        var mcd = gcd(numRes, denomRes);
+        numRes = numRes / mcd;
+        denomRes = denomRes / mcd;
+        var fracSim = numRes + "/" + denomRes;
+
+        opcion("numFracResult").value = numRes;
+        opcion("denomFracResult").value = denomRes;
+
+        console.log("La fraccion original es: " + fracRes);
+        console.log("La fraccion simplificada es: " + fracSim);
+        return fracRes;
     };
-    /*const Div = (Frac1, Frac2) => {
+    const Div = () => {
+        var numRes = Numerador1 * Denominador2;
+        var denomRes = Denominador1 * Numerador2;
+        var fracRes = numRes + "/" + denomRes;
 
+        var mcd = gcd(numRes, denomRes);
+        numRes = numRes / mcd;
+        denomRes = denomRes / mcd;
+        var fracSim = numRes + "/" + denomRes;
+
+        opcion("numFracResult").value = numRes;
+        opcion("denomFracResult").value = denomRes;
+
+        console.log("La fraccion original es: " + fracRes);
+        console.log("La fraccion simplificada es: " + fracSim);
+        return fracRes;
     };
     opcion("suma").addEventListener("click", event => {
-        Suma();
+        if (validar() == true) {
+            Suma();
+        }
     });
-    opcion("resta").addEventListener("click", event => {
-        Resta();
+    /*opcion("resta").addEventListener("click", event => {
+        if (validar() == true) {
+            Resta();
+        }
     });*/
     opcion("multiplicacion").addEventListener("click", event => {
-        this.validar();
-        Mult(Numerador1, Numerador2, Denominador1, Denominador2);
+        if (validar() == true) {
+            Mult();
+        }
     });
-    /*opcion("division").addEventListener("click", event => {
-        Div();
-    });*/
-    function validar() {
-        if (opcion("denomFrac1").value === 0 || opcion("denomFrac2").value === 0) {
-            alert("El denominador del fraccionario no puede ser 0");
+    opcion("division").addEventListener("click", event => {
+        if (validar() == true) {
+            Div();
         }
-        while (parseInt(opcion("denomFrac1").value) != 0) {
-            let Numerador1 = parseInt(opcion("numFrac1").value);
-            let Denominador1 = parseInt(opcion("denomFrac1").value);
-        }
-        while (parseInt(opcion("denomFrac2").value) != 0) {
-            let Numerador2 = parseInt(opcion("numFrac2").value);
-            let Denominador2 = parseInt(opcion("denomFrac2").value);
-        }
-    }
+    });
 
     function gcd(a, b) {
         while (b !== 0) {
