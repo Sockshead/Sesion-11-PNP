@@ -29,60 +29,86 @@ window.onload = function() {
             numRes = Numerador1 + Numerador2;
             denomRes = Denominador1;
         } else {
+            Numerador1 = Numerador1 * Denominador2;
+            Numerador2 = Numerador2 * Denominador1;
+            denomRes = Denominador1 * Denominador2;
 
+            numRes = Numerador1 + Numerador2;
         }
-
         var fracRes = numRes + "/" + denomRes;
-        console.log(fracRes);
-        return fracRes;
-    };
-    /*const Resta = (Frac1, Frac2) => {
-
-    };*/
-    const Mult = () => {
-        var numRes = Numerador1 * Numerador2;
-        var denomRes = Denominador1 * Denominador2;
-        var fracRes = numRes + "/" + denomRes;
-
-        var mcd = gcd(numRes, denomRes);
-        numRes = numRes / mcd;
-        denomRes = denomRes / mcd;
-        var fracSim = numRes + "/" + denomRes;
+        var fracSim = simplificar(numRes, denomRes);
 
         opcion("numFracResult").value = numRes;
         opcion("denomFracResult").value = denomRes;
 
         console.log("La fraccion original es: " + fracRes);
         console.log("La fraccion simplificada es: " + fracSim);
-        return fracRes;
+    };
+    const Resta = (Frac1, Frac2) => {
+        var numRes = 0;
+        var denomRes = 0;
+
+        if (Denominador1 === Denominador2) {
+            numRes = Numerador1 - Numerador2;
+            denomRes = Denominador1;
+        } else {
+            Numerador1 = Numerador1 * Denominador2;
+            Numerador2 = Numerador2 * Denominador1;
+            denomRes = Denominador1 * Denominador2;
+
+            numRes = Numerador1 - Numerador2;
+        }
+        var fracRes = numRes + "/" + denomRes;
+
+        if (fracRes != 0) {
+            var fracSim = simplificar(numRes, denomRes);
+        } else {
+            fracRes = 0;
+            fracSim = 0;
+        }
+
+        opcion("numFracResult").value = numRes;
+        opcion("denomFracResult").value = denomRes;
+
+        console.log("La fraccion original es: " + fracRes);
+        console.log("La fraccion simplificada es: " + fracSim);
+    };
+    const Mult = () => {
+        var numRes = Numerador1 * Numerador2;
+        var denomRes = Denominador1 * Denominador2;
+        var fracRes = numRes + "/" + denomRes;
+
+        var fracSim = simplificar(numRes, denomRes);
+
+        opcion("numFracResult").value = numRes;
+        opcion("denomFracResult").value = denomRes;
+
+        console.log("La fraccion original es: " + fracRes);
+        console.log("La fraccion simplificada es: " + fracSim);
     };
     const Div = () => {
         var numRes = Numerador1 * Denominador2;
         var denomRes = Denominador1 * Numerador2;
         var fracRes = numRes + "/" + denomRes;
 
-        var mcd = gcd(numRes, denomRes);
-        numRes = numRes / mcd;
-        denomRes = denomRes / mcd;
-        var fracSim = numRes + "/" + denomRes;
+        var fracSim = simplificar(numRes, denomRes);
 
         opcion("numFracResult").value = numRes;
         opcion("denomFracResult").value = denomRes;
 
         console.log("La fraccion original es: " + fracRes);
         console.log("La fraccion simplificada es: " + fracSim);
-        return fracRes;
     };
     opcion("suma").addEventListener("click", event => {
         if (validar() == true) {
             Suma();
         }
     });
-    /*opcion("resta").addEventListener("click", event => {
+    opcion("resta").addEventListener("click", event => {
         if (validar() == true) {
             Resta();
         }
-    });*/
+    });
     opcion("multiplicacion").addEventListener("click", event => {
         if (validar() == true) {
             Mult();
@@ -100,7 +126,14 @@ window.onload = function() {
             b = a % b;
             a = t;
         }
-
         return a;
+    }
+
+    function simplificar(a, b) {
+        var mcd = gcd(a, b);
+        numRes = a / mcd;
+        denomRes = b / mcd;
+        var frac = numRes + "/" + denomRes;
+        return frac;
     }
 };
