@@ -36,7 +36,13 @@ window.onload = function() {
             numRes = Numerador1 + Numerador2;
         }
         var fracRes = numRes + "/" + denomRes;
-        var fracSim = simplificar(numRes, denomRes);
+
+        var mcd = gcd(numRes, denomRes);
+        numRes = numRes / mcd;
+        denomRes = denomRes / mcd;
+        var frac = numRes + "/" + denomRes;
+
+        var fracSim = frac;
 
         opcion("numFracResult").value = numRes;
         opcion("denomFracResult").value = denomRes;
@@ -61,7 +67,12 @@ window.onload = function() {
         var fracRes = numRes + "/" + denomRes;
 
         if (fracRes != 0) {
-            var fracSim = simplificar(numRes, denomRes);
+            var mcd = gcd(numRes, denomRes);
+            numRes = numRes / mcd;
+            denomRes = denomRes / mcd;
+            var frac = numRes + "/" + denomRes;
+
+            var fracSim = frac;
         } else {
             fracRes = 0;
             fracSim = 0;
@@ -78,7 +89,12 @@ window.onload = function() {
         var denomRes = Denominador1 * Denominador2;
         var fracRes = numRes + "/" + denomRes;
 
-        var fracSim = simplificar(numRes, denomRes);
+        var mcd = gcd(numRes, denomRes);
+        numRes = numRes / mcd;
+        denomRes = denomRes / mcd;
+        var frac = numRes + "/" + denomRes;
+
+        var fracSim = frac;
 
         opcion("numFracResult").value = numRes;
         opcion("denomFracResult").value = denomRes;
@@ -91,7 +107,12 @@ window.onload = function() {
         var denomRes = Denominador1 * Numerador2;
         var fracRes = numRes + "/" + denomRes;
 
-        var fracSim = simplificar(numRes, denomRes);
+        var mcd = gcd(numRes, denomRes);
+        numRes = numRes / mcd;
+        denomRes = denomRes / mcd;
+        var frac = numRes + "/" + denomRes;
+
+        var fracSim = frac;
 
         opcion("numFracResult").value = numRes;
         opcion("denomFracResult").value = denomRes;
@@ -127,13 +148,5 @@ window.onload = function() {
             a = t;
         }
         return a;
-    }
-
-    function simplificar(a, b) {
-        var mcd = gcd(a, b);
-        numRes = a / mcd;
-        denomRes = b / mcd;
-        var frac = numRes + "/" + denomRes;
-        return frac;
     }
 };
